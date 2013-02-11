@@ -163,7 +163,7 @@ class Group
    *
    * @return string Closing tag
    */
-  protected function required()
+  public function required()
   {
     $this->required = true;
     return $this;
