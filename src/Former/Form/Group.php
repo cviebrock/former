@@ -28,6 +28,12 @@ class Group
   protected $state = null;
 
   /**
+   * Is the group required
+   * @var bool
+   */
+  protected $required = false;
+
+  /**
    * Whether the field should be displayed raw or not
    * @var boolean
    */
@@ -108,7 +114,7 @@ class Group
     }
 
     // Required state
-    if ($this->app['former']->field() and $this->app['former']->field()->isRequired()) {
+    if ($this->required || ($this->app['former']->field() and $this->app['former']->field()->isRequired()) ) {
       $this->attributes = Helpers::addClass($this->attributes, $this->app['former']->getOption('required_class'));
     }
 
@@ -150,6 +156,17 @@ class Group
   protected function close()
   {
     return '</div>';
+  }
+
+  /**
+   * Force a group to be required
+   *
+   * @return string Closing tag
+   */
+  protected function required()
+  {
+    $this->required = true;
+    return $this;
   }
 
   ////////////////////////////////////////////////////////////////////
